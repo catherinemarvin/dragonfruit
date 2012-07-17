@@ -1,4 +1,7 @@
 Dragonfruit::Application.routes.draw do
+
+  get "/" => 'static_pages#home', :as => "home"
+
   resources :games_images
 
   resources :source_images
@@ -7,9 +10,13 @@ Dragonfruit::Application.routes.draw do
 
   resources :users
 
-  root to: 'static_pages#home'
+  post "/", to: 'static_pages#beginProcess'
+
+
 
   match "/help", to: 'static_pages#help'
+
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
