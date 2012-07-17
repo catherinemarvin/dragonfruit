@@ -1,0 +1,29 @@
+<h1>Listing games_images</h1>
+
+<table>
+  <tr>
+    <th>Gameid</th>
+    <th>Imageurl</th>
+    <th>Votes</th>
+    <th>Usersubmitted</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @games_images.each do |games_image| %>
+  <tr>
+    <td><%= games_image.gameId %></td>
+    <td><%= games_image.imageUrl %></td>
+    <td><%= games_image.votes %></td>
+    <td><%= games_image.userSubmitted %></td>
+    <td><%= link_to 'Show', games_image %></td>
+    <td><%= link_to 'Edit', edit_games_image_path(games_image) %></td>
+    <td><%= link_to 'Destroy', games_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Games image', new_games_image_path %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Gameid:</b>
+  <%= @games_image.gameId %>
+</p>
+
+<p>
+  <b>Imageurl:</b>
+  <%= @games_image.imageUrl %>
+</p>
+
+<p>
+  <b>Votes:</b>
+  <%= @games_image.votes %>
+</p>
+
+<p>
+  <b>Usersubmitted:</b>
+  <%= @games_image.userSubmitted %>
+</p>
+
+
+<%= link_to 'Edit', edit_games_image_path(@games_image) %> |
+<%= link_to 'Back', games_images_path %>

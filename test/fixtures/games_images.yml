@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  gameId: MyString
+  imageUrl: MyString
+  votes: 1
+  userSubmitted: MyString
+
+two:
+  gameId: MyString
+  imageUrl: MyString
+  votes: 1
+  userSubmitted: MyString

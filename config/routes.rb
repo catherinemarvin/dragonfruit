@@ -1,4 +1,10 @@
 Dragonfruit::Application.routes.draw do
+  resources :games_images
+
+  resources :source_images
+
+  resources :games
+
   resources :users
 
   root to: 'static_pages#home'
