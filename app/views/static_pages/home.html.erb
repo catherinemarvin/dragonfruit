@@ -7,7 +7,13 @@
 	<div class="row">
 		<div class="span12">
 			<h2>Play now!</h2>
-			<p>Form goes below somewhere</p>
+			<%= form_tag do %>
+				<%= label_tag(:username, "Name:") %>
+				<%= text_field(:user, :name) %>
+				<%= label_tag(:gamename, "Game:") %>
+				<%= text_field(:user, :game) %>
+				<%= submit_tag("Go") %>
+			<% end %>
 		</div>
 	</div>
 </div>
