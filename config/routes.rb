@@ -6,6 +6,8 @@ Dragonfruit::Application.routes.draw do
 
   post "/games/:id", to: 'games#start'
 
+  post "/games/:id/submit", to: 'games#addImage'
+
   resources :games_images
 
   resources :source_images

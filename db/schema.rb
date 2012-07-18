@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120718180929) do
+ActiveRecord::Schema.define(:version => 20120718204703) do
 
   create_table "games", :force => true do |t|
     t.string   "gameId"
@@ -22,12 +22,12 @@ ActiveRecord::Schema.define(:version => 20120718180929) do
   end
 
   create_table "games_images", :force => true do |t|
-    t.string   "gameId"
+    t.integer  "gameId",        :limit => 255
     t.string   "imageUrl"
     t.integer  "votes"
     t.string   "userSubmitted"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   create_table "source_images", :force => true do |t|

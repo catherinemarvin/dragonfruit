@@ -24,6 +24,25 @@ class GamesController < ApplicationController
     end
   end
 
+  # POST /games/1/submit
+  # adds an image!!!
+  def addImage
+    logger.debug "Adding image!!!"
+    logger.debug params[:id]
+    logger.debug params[:url]
+    logger.debug params[:name]
+
+    obj = { :gameId => params[:id], :imageUrl => params[:url], :votes => 0, :userSubmitted => params[:name]}
+    @added = GamesImage.new(obj)
+
+    if @added.save
+      logger.debug "Save went great!"
+    else
+      logger.debug "Something went terribly wrong with the save!!"
+    end
+    render :nothing => true
+  end
+
   # POST /games/1
   #you should flip the started bit to TRUE
   def start
@@ -39,6 +58,7 @@ class GamesController < ApplicationController
       @game.save
       render :action => "show"
     end
+    #render :nothing => true
   end
 
 
