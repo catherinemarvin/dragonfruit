@@ -25,16 +25,23 @@ class StaticPagesController < ApplicationController
   		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
       logger.debug(alreadyExtant)
       logger.debug(alreadyExtant.length)
-      @game = Game.new(obj)
+      if alreadyExtant.length == 0 #if a game with this name doesn't exist, create it
+        @game = Game.new(obj)
 
-  		if @game.save
-        logger.debug "everything is good"
-        logger.debug @game.id.to_s
-  			#render json: @user.to_json
+    		if @game.save
+          logger.debug "everything is good"
+          logger.debug @game.id.to_s
+    			#render json: @user.to_json
+          redirect_to '/games/'+@game.id.to_s
+    		else
+    			render json: { :errors => @game.errors }.to_json
+    		end
+      else #otherwise the game exists and you should simply join it
+        logger.debug "already exists son"
+        @game = alreadyExtant[0]
         redirect_to '/games/'+@game.id.to_s
-  		else
-  			render json: { :errors => @game.errors }.to_json
-  		end
+      end
+
   	else
   		#render json: @user.errors, status: :unprocessable_entity
   		render json: { :errors => @user.errors }.to_json
