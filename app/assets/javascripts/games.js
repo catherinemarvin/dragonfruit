@@ -41,20 +41,28 @@ $(document).ready(function () {
 		$.get("/games/"+$.cookie("gameId")+"/getImages", function (data) {
 			console.log(data);
 			for (i in data) {
-				var url = data[i];
-				$("#images").append("<img class='userImg' src='"+url+"'/>")
+				var url = data[i]["url"];
+				var author = data[i]["submittedBy"];
+				$("#images").append("<img class='userImg' id='userImg-"+author+"' src='"+url+"'/>")
 			}
+			$(".userImg").click(function () {
+				console.log('gonna cast a vote');
+				var myId = this.id;
+				var votee = myId.substring(8);
+				console.log('vote for: ', votee);
+				castVote(votee);
+
+			})
 		});
 	});
 
-	$("#vote").click(function () {
-		var votee = "khwang"
+	var castVote = function (votee) {
 		console.log("Voting for: ",votee);
 		$.post("/games/"+$.cookie("gameId")+"/vote", { userId : votee }, function (data) {
 			console.log(data);
 		});
 
-	});
+	}
 
 
 });

@@ -53,7 +53,7 @@ class GamesController < ApplicationController
     images = GamesImage.find(:all, { :conditions => {:gameId => params[:id] } } )
     logger.debug images
     toReturn = images.map do |e|
-      e.imageUrl
+      { :url => e.imageUrl, :submittedBy => e.userSubmitted }
     end
     render json: toReturn.to_json
   end
