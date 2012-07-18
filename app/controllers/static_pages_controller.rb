@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
 
   	if @user.save
   		source = rand(SourceImage.count) + 1
-  		obj = { :gameId => params[:user][:game], :sourceImage => source }
+  		obj = { :gameId => params[:user][:game], :sourceImage => source, :started => false }
   		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
       
       #save user information in a cookie
@@ -30,6 +30,8 @@ class StaticPagesController < ApplicationController
       cookies[:game] = @user.game
 
       if alreadyExtant.length == 0 #if a game with this name doesn't exist, create it
+        logger.debug "game with this name doesn't exist"
+        logger.debug(obj)
         @game = Game.new(obj)
 
     		if @game.save
@@ -38,6 +40,9 @@ class StaticPagesController < ApplicationController
     			#render json: @user.to_json
           redirect_to '/games/'+@game.id.to_s
     		else
+          logger.debug "cannot save the game"
+          logger.debug @game.started
+          
     			render json: { :errors => @game.errors }.to_json
     		end
       else #otherwise the game exists and you should simply join it
