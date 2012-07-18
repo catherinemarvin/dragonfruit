@@ -23,8 +23,12 @@ class StaticPagesController < ApplicationController
   		source = rand(SourceImage.count) + 1
   		obj = { :gameId => params[:user][:game], :sourceImage => source }
   		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
-      logger.debug(alreadyExtant)
-      logger.debug(alreadyExtant.length)
+      
+      #save user information in a cookie
+
+      cookies[:name] = @user.name
+      cookies[:game] = @user.game
+
       if alreadyExtant.length == 0 #if a game with this name doesn't exist, create it
         @game = Game.new(obj)
 
