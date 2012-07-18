@@ -13,7 +13,10 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    logger.debug "Show me the money"
     @game = Game.find(params[:id])
+    @sourceUrl = SourceImage.find(@game[:sourceImage])[:url]
+    logger.debug @sourceUrl
 
     respond_to do |format|
       format.html # show.html.erb

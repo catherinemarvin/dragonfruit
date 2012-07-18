@@ -2,6 +2,8 @@ Dragonfruit::Application.routes.draw do
 
   get "/" => 'static_pages#home', :as => "home"
 
+  post "/", to: 'static_pages#beginProcess'
+
   resources :games_images
 
   resources :source_images
@@ -10,7 +12,7 @@ Dragonfruit::Application.routes.draw do
 
   resources :users
 
-  post "/", to: 'static_pages#beginProcess'
+  
 
 
 
