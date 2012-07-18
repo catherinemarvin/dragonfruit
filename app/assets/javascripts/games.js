@@ -56,6 +56,13 @@ $(document).ready(function () {
 		});
 	});
 
+	$("#displayWinner").click(function () {
+		console.log("displaying the winner");
+		$.get("/games/"+$.cookie("gameId")+"/winner", function (data) {
+			console.log(data);
+		});
+	});
+
 	var castVote = function (votee) {
 		console.log("Voting for: ",votee);
 		$.post("/games/"+$.cookie("gameId")+"/vote", { userId : votee }, function (data) {

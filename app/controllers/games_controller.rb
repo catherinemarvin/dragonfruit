@@ -76,6 +76,14 @@ class GamesController < ApplicationController
 
   end
 
+  # GET /games/1/winner
+  def winner
+    logger.debug "And the winner is..."
+    logger.debug params[:id]
+    winner = GamesImage.find(:first, { :order => 'votes desc' } )
+    logger.debug(winner.imageUrl)
+  end
+
   # POST /games/1
   #you should flip the started bit to TRUE
   def start
