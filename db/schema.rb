@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120717211356) do
 
   create_table "games", :force => true do |t|
+    t.string   "gameId"
     t.integer  "sourceImage"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

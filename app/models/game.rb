@@ -1,3 +1,3 @@
 class Game < ActiveRecord::Base
-  attr_accessible :id, :sourceImage
+  attr_accessible :gameId, :sourceImage
 end
