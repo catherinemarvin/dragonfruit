@@ -27,6 +27,7 @@ Game.create(gameId: "room1", sourceImage: 1, started: true)
 #first one is rainbow dash
 #second one is twilight sparkle
 #third one is rarity
+#fourth one (manual input) is fluttershy http://i.imgur.com/GSP06.png
 GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/8o1ca.png', votes: 0, userSubmitted: 'khwang')
 GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/b5itS.png', votes: 0, userSubmitted: 'number2')
 GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/tO825.png', votes: 0, userSubmitted: 'wednesday')

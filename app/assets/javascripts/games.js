@@ -47,5 +47,14 @@ $(document).ready(function () {
 		});
 	});
 
+	$("#vote").click(function () {
+		var votee = "khwang"
+		console.log("Voting for: ",votee);
+		$.post("/games/"+$.cookie("gameId")+"/vote", { userId : votee }, function (data) {
+			console.log(data);
+		});
+
+	});
+
 
 });

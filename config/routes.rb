@@ -10,6 +10,8 @@ Dragonfruit::Application.routes.draw do
 
   get "/games/:id/getImages", to: 'games#getImages'
 
+  post "/games/:id/vote", to: 'games#vote'
+
   resources :games_images
 
   resources :source_images

@@ -58,6 +58,24 @@ class GamesController < ApplicationController
     render json: toReturn.to_json
   end
 
+  # POST /games/1/vote
+  # vote for an image
+
+  def vote
+    logger.debug "Exercising constitutional right to vote..."
+    logger.debug params[:id]
+    logger.debug params[:userId]
+    gameImg = GamesImage.find(:first, { :conditions => { :gameId => params[:id], :userSubmitted => params[:userId]} } )
+    gameImg.votes += 1
+    if gameImg.save
+      logger.debug "Logged your vote!"
+      render :nothing => true
+    else
+      logger.debug "Something went horribly wrong"
+    end
+
+  end
+
   # POST /games/1
   #you should flip the started bit to TRUE
   def start
