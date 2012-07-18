@@ -26,6 +26,7 @@ class GamesController < ApplicationController
 
   # POST /games/1/submit
   # adds an image!!!
+
   def addImage
     logger.debug "Adding image!!!"
     logger.debug params[:id]
@@ -41,6 +42,20 @@ class GamesController < ApplicationController
       logger.debug "Something went terribly wrong with the save!!"
     end
     render :nothing => true
+  end
+
+  # GET /games/1/getImages
+  # returns the images
+
+  def getImages
+    logger.debug "Fetching images..."
+    logger.debug params[:id]
+    images = GamesImage.find(:all, { :conditions => {:gameId => params[:id] } } )
+    logger.debug images
+    toReturn = images.map do |e|
+      e.imageUrl
+    end
+    render json: toReturn.to_json
   end
 
   # POST /games/1

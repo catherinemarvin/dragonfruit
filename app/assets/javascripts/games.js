@@ -18,7 +18,7 @@ $(document).ready(function () {
 		});
 	}
 
-	checkGameState();
+	//checkGameState();
 
 	//eventually this will load up the webcam and stuff
 	//for now it displays a box and you submit a picture
@@ -33,6 +33,17 @@ $(document).ready(function () {
 		console.log("URL submitted: ",url)
 		$.post("/games/"+$.cookie("gameId")+"/submit", {url: url, name: $.cookie("name")}, function (data) {
 			console.log(data)
+		});
+	});
+
+	$("#viewImages").click(function () {
+		console.log("Time to load images")
+		$.get("/games/"+$.cookie("gameId")+"/getImages", function (data) {
+			console.log(data);
+			for (i in data) {
+				var url = data[i];
+				$("#images").append("<img class='userImg' src='"+url+"'/>")
+			}
 		});
 	});
 

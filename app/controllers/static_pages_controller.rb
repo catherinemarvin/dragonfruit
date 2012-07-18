@@ -24,6 +24,7 @@ class StaticPagesController < ApplicationController
   		obj = { :gameId => params[:user][:game], :sourceImage => source, :started => false }
   		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
       
+      
       #save user information in a cookie
 
       cookies[:name] = @user.name
@@ -49,6 +50,7 @@ class StaticPagesController < ApplicationController
       else #otherwise the game exists and you should simply join it
         logger.debug "already exists son"
         @game = alreadyExtant[0]
+        cookies[:gameId] = @game.id
         redirect_to '/games/'+@game.id.to_s
       end
 

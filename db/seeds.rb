@@ -14,3 +14,19 @@
 SourceImage.create(url: 'http://i.imgur.com/lURPV.jpg')
 SourceImage.create(url: 'http://i.imgur.com/q5YXy.jpg')
 SourceImage.create(url: 'http://i.imgur.com/hYvFb.jpg')
+
+#seed Users with three players
+User.create(name: "khwang", game: "room1")
+User.create(name: "number2", game: "room1")
+User.create(name: "wednesday", game: "room1")
+
+#seed Game with one game
+Game.create(gameId: "room1", sourceImage: 1, started: true)
+
+#seed GamesImage with saved URLs
+#first one is rainbow dash
+#second one is twilight sparkle
+#third one is rarity
+GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/8o1ca.png', votes: 0, userSubmitted: 'khwang')
+GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/b5itS.png', votes: 0, userSubmitted: 'number2')
+GamesImage.create(gameId: 1, imageUrl: 'http://i.imgur.com/tO825.png', votes: 0, userSubmitted: 'wednesday')
