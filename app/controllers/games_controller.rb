@@ -24,6 +24,24 @@ class GamesController < ApplicationController
     end
   end
 
+  # POST /games/1
+  #you should flip the started bit to TRUE
+  def start
+    logger.debug "Starting game!!!"
+    logger.debug params[:id]
+    @game = Game.find(params[:id])
+    @sourceUrl = SourceImage.find(@game[:sourceImage])[:url]
+    if @game.started == true
+      logger.debug "You've already started a game :("
+    else
+      logger.debug "Starting the game!"
+      @game.started = true
+      @game.save
+      render :action => "show"
+    end
+  end
+
+
   # GET /games/new
   # GET /games/new.json
   def new

@@ -4,6 +4,8 @@ Dragonfruit::Application.routes.draw do
 
   post "/", to: 'static_pages#beginProcess'
 
+  post "/games/:id", to: 'games#start'
+
   resources :games_images
 
   resources :source_images

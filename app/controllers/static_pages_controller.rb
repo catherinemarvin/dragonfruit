@@ -36,13 +36,14 @@ class StaticPagesController < ApplicationController
 
     		if @game.save
           logger.debug "everything is good"
+          cookies[:gameId] = @game.id
           logger.debug @game.id.to_s
     			#render json: @user.to_json
           redirect_to '/games/'+@game.id.to_s
     		else
           logger.debug "cannot save the game"
           logger.debug @game.started
-          
+
     			render json: { :errors => @game.errors }.to_json
     		end
       else #otherwise the game exists and you should simply join it
