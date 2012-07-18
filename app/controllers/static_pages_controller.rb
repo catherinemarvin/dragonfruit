@@ -20,12 +20,18 @@ class StaticPagesController < ApplicationController
   	@user = User.new(params[:user])
 
   	if @user.save
-  		source = rand(SourceImage.count)
+  		source = rand(SourceImage.count) + 1
   		obj = { :gameId => params[:user][:game], :sourceImage => source }
-  		@game = Game.new(obj)
+  		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
+      logger.debug(alreadyExtant)
+      logger.debug(alreadyExtant.length)
+      @game = Game.new(obj)
 
   		if @game.save
-  			render json: @user.to_json
+        logger.debug "everything is good"
+        logger.debug @game.id.to_s
+  			#render json: @user.to_json
+        redirect_to '/games/'+@game.id.to_s
   		else
   			render json: { :errors => @game.errors }.to_json
   		end
