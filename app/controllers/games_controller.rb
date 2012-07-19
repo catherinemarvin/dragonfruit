@@ -24,6 +24,16 @@ class GamesController < ApplicationController
     end
   end
 
+  # GET /games/1/source
+  # shows source image
+  def source
+    logger.debug "finding the source"
+    logger.debug params[:id]
+    sourceId = Game.find(params[:id]).sourceImage
+    source = SourceImage.find(sourceId).url
+    render json: { :url => source }.to_json
+  end
+
   # POST /games/1/submit
   # adds an image!!!
 
@@ -82,6 +92,7 @@ class GamesController < ApplicationController
     logger.debug params[:id]
     winner = GamesImage.find(:first, { :order => 'votes desc' } )
     logger.debug(winner.imageUrl)
+    render json: { :url => winner.imageUrl }.to_json
   end
 
   # POST /games/1

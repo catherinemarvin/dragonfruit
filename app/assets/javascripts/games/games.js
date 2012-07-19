@@ -17,6 +17,70 @@ $(document).ready(function () {
 		});
 	}
 
+	var pos = 0, ctx = null, saveCB, image = [];
+
+	canvas = document.getElementById("canvas")
+
+	if (canvas.getContext) {
+		ctx = document.getElementById("canvas").getContext("2d");
+		ctx.clearRect(0,0,320,240);
+		var img = new Image();
+		img.src = "";
+		img.onload = function () {
+			ctx.drawImage(img, 129, 89);
+		}
+		image = ctx.getImageData(0,0,320,240);
+	}
+	$(canvas).hide();
+
+
+	$("#camera").webcam({
+		width: 320,
+		height: 240,
+		mode: "callback",
+		swffile: "/jscam_canvas_only.swf",
+		onTick: function (remain) {
+			if (0 == remain) {
+				$("#status").text("Cheese!");
+			} else {
+				$("#status").text(remain + " seconds remaining...");
+			}
+		},
+		onSave: function (data) {
+			var col = data.split(";");
+			var img = image;
+
+			for (var i = 0; i < 320; i++) {
+				var tmp = parseInt(col[i]);
+				img.data[pos + 0] = (tmp >> 16) & 0xff;
+				img.data[pos + 1] = (tmp >> 8) & 0xff;
+				img.data[pos + 2] = tmp & 0xff;
+				img.data[pos + 3] = 0xff;
+				pos+=4;
+			}
+
+			if (pos >= 4 * 320 * 240) {
+				ctx.putImageData(img, 0, 0);
+				pos = 0;
+
+				$("#webcam-object").remove();
+				var canvas = $("#canvas").show();
+				$("#status").remove();
+				var dataURL = canvas[0].toDataURL('image/png');
+				var encodedImage = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+
+				console.log(encodedImage);
+			}
+		},
+		onCapture: function () {
+			webcam.save()
+		},
+		debug: function (type, string) {
+			$("#status").html(type + ": " + string);
+		},
+		onLoad: function () {}
+	});
+
 	checkGameState();
 
 	//eventually this will load up the webcam and stuff

@@ -16,24 +16,35 @@
 
 -->
 
+<%= javascript_include_tag "games/games" %>
+<%= javascript_include_tag "games/jquery.webcam" %>
+
 <p>Temporary image here. Eventually this will be dynamically loaded when everybody is ready to play!</p>
+
+<!--
 
 <%= image_tag @sourceUrl %>
 
-<p>Got your cookie information right here!!!</p>
-<p> <%= cookies[:name]%> </p>
-<p> <%= cookies[:game] %> </p>
-<p> <%= cookies[:gameId] %> </p>
+-->
 
-<%= button_to "Start Game!", { :action => "start" } %>
+<%= button_to "Start Game!", { :action => "start" }, { :id => "startGame" } %>
+
+<div id="sourceImg"></div>
 
 <input id="userImage"></input>
 <button id="submitImage">Submit</button>
-
-<button id="viewImages">View Images</button>
 
 <p>Images will get displayed below</p>
 
 <div id="images"></div>
 
 <button id="displayWinner">Display Winner</button>
+
+<div id="winner"></div>
+
+<hr>
+
+<div id="camera"></div>
+<div id="status"></div>
+<canvas id="canvas" width="320" height="240"></canvas>
+<button onclick="webcam.capture(3);void(0);" class="button" id="takepicture"></button>

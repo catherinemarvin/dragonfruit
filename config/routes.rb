@@ -14,6 +14,8 @@ Dragonfruit::Application.routes.draw do
 
   get "/games/:id/winner", to: 'games#winner'
 
+  get "/games/:id/source", to: 'games#source'
+
   resources :games_images
 
   resources :source_images
