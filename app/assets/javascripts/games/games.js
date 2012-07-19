@@ -148,6 +148,7 @@ $(document).ready(function () {
 		$.get("/games/"+$.cookie("gameId")+"/winner", function (data) {
 			console.log(data);
 			$("#winner").append("<img class='userImg' src='"+data.url+"'>");
+			$("#status").text("Winner above!");
 		});
 	}
 

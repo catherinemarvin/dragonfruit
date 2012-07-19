@@ -23,7 +23,7 @@ class StaticPagesController < ApplicationController
   		source = rand(SourceImage.count) + 1
   		obj = { :gameId => params[:user][:game], :sourceImage => source, :started => false }
   		alreadyExtant = Game.find(:all, { :conditions => {:gameId => obj[:gameId] } } )
-      
+
       
       #save user information in a cookie
 
