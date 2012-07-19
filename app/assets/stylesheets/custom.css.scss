@@ -1,6 +1,30 @@
 @import "bootstrap";
 @import "bootstrap-responsive";
 
+$background: #6A4A3C;
+$header: #00A0B0;
+$text: #FFFFFF;
+$topbar: #EDC951;
+$secondary: #CC333F;
+
 body {
 	margin-top: 60px;
+	background-color: $background;
+	color: $text;
+}
+
+label {
+	color: $text;
+}
+
+.hero-unit {
+	background-color: $secondary;
+}
+
+h1 {
+	color: $header;
+}
+
+h2 {
+	color: $text;
 }

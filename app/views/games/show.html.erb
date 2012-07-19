@@ -19,13 +19,7 @@
 <%= javascript_include_tag "games/games" %>
 <%= javascript_include_tag "games/jquery.webcam" %>
 
-<p>Temporary image here. Eventually this will be dynamically loaded when everybody is ready to play!</p>
-
-<!--
-
-<%= image_tag @sourceUrl %>
-
--->
+<%= button_to "Play again?", { :action => "restart" }, { :id => "restartGame", :remote => true } %>
 
 <%= button_to "Start Game!", { :action => "start" }, { :id => "startGame", :remote => true } %>
 
