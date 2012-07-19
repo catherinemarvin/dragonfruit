@@ -21,7 +21,7 @@ User.create(name: "number2", game: "room1")
 User.create(name: "wednesday", game: "room1")
 
 #seed Game with one game
-Game.create(gameId: "room1", sourceImage: 1, started: true)
+Game.create(gameId: "room1", sourceImage: 1, started: false)
 
 #seed GamesImage with saved URLs
 #first one is rainbow dash

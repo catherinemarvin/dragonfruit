@@ -48,10 +48,11 @@ class GamesController < ApplicationController
 
     if @added.save
       logger.debug "Save went great!"
+      render json: {:status => :ok}.to_json
     else
       logger.debug "Something went terribly wrong with the save!!"
     end
-    render :nothing => true
+    #render :nothing => true
   end
 
   # GET /games/1/getImages
@@ -108,7 +109,8 @@ class GamesController < ApplicationController
       logger.debug "Starting the game!"
       @game.started = true
       @game.save
-      render :action => "show"
+      #render :action => "show"
+      render :nothing => true
     end
     #render :nothing => true
   end

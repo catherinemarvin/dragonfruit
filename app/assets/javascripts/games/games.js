@@ -65,11 +65,11 @@ $(document).ready(function () {
 
 				$("#webcam-object").remove();
 				var canvas = $("#canvas").show();
-				$("#status").remove();
+				//$("#status").remove();
 				var dataURL = canvas[0].toDataURL('image/png');
 				var encodedImage = dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-
-				console.log(encodedImage);
+				upload(encodedImage)
+				$("#camera").remove()
 			}
 		},
 		onCapture: function () {
@@ -83,14 +83,33 @@ $(document).ready(function () {
 
 	checkGameState();
 
-	//eventually this will load up the webcam and stuff
-	//for now it displays a box and you submit a picture
+	var upload = function (imagestream) {
+		$.post("http://api.imgur.com/2/upload.json", {
+			key: "50a3a2c69c7102e780797f9ceaafa180",
+			image: imagestream
+		}, function (data) {
+			var url = data.upload.links.original;
+			saveImage(url);
+		});
+	}
+
+	var saveImage = function (url) {
+		console.log("Submitting an image");
+		console.log("URL submitted: ",url)
+		$.post("/games/"+$.cookie("gameId")+"/submit", {url: url, name: $.cookie("name")}, function (data) {
+			console.log(data)
+			$("#status").text("Nice picture!");
+			//after save, wait 5 seconds, then load the images
+			setTimeout(displayImages,5000)
+		});
+	}
 
 	var displayStart = function () {
 		console.log("displaying the beginning")
 		$("#startGame").css("display","none");
 		displaySourceImage();
-		//displayImages();
+		//assume game doesn't start until webcam is loaded
+		webcam.capture(3);
 	}
 
 	var displaySourceImage = function () {
@@ -100,15 +119,6 @@ $(document).ready(function () {
 			$("#sourceImg").append("<img src='"+data.url+"'>");
 		});
 	}
-
-	$("#submitImage").click(function () {
-		console.log("Submitting an image");
-		var url = $("#userImage").val();
-		console.log("URL submitted: ",url)
-		$.post("/games/"+$.cookie("gameId")+"/submit", {url: url, name: $.cookie("name")}, function (data) {
-			console.log(data)
-		});
-	});
 
 	var displayImages = function () {
 		console.log("Time to load images")
@@ -125,18 +135,21 @@ $(document).ready(function () {
 				var votee = myId.substring(8);
 				console.log('vote for: ', votee);
 				castVote(votee);
-
-			})
+				$("#images").remove();
+				$("#status").text("Thanks for your vote! Wait a bit for the final results...")
+				
+			});
+			setTimeout(displayWinner,10000);
 		});
 	}
 
-	$("#displayWinner").click(function () {
+	var displayWinner = function () {
 		console.log("displaying the winner");
 		$.get("/games/"+$.cookie("gameId")+"/winner", function (data) {
 			console.log(data);
 			$("#winner").append("<img class='userImg' src='"+data.url+"'>");
 		});
-	});
+	}
 
 	var castVote = function (votee) {
 		console.log("Voting for: ",votee);

@@ -27,18 +27,13 @@
 
 -->
 
-<%= button_to "Start Game!", { :action => "start" }, { :id => "startGame" } %>
+<%= button_to "Start Game!", { :action => "start" }, { :id => "startGame", :remote => true } %>
 
 <div id="sourceImg"></div>
 
-<input id="userImage"></input>
-<button id="submitImage">Submit</button>
-
-<p>Images will get displayed below</p>
+<br>
 
 <div id="images"></div>
-
-<button id="displayWinner">Display Winner</button>
 
 <div id="winner"></div>
 
@@ -47,4 +42,3 @@
 <div id="camera"></div>
 <div id="status"></div>
 <canvas id="canvas" width="320" height="240"></canvas>
-<button onclick="webcam.capture(3);void(0);" class="button" id="takepicture"></button>
