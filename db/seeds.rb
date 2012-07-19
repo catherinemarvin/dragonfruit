@@ -10,10 +10,14 @@
 #first one is f7u12
 #second one is me gusta
 #third one is poker face
+#fourth one is forever alone smiling
+#fifth one is LOL
 
 SourceImage.create(url: 'http://i.imgur.com/lURPV.jpg')
 SourceImage.create(url: 'http://i.imgur.com/q5YXy.jpg')
 SourceImage.create(url: 'http://i.imgur.com/hYvFb.jpg')
+SourceImage.create(url: 'http://i.imgur.com/MJpy3.jpg')
+SourceImage.create(url: 'http://i.imgur.com/7q244.png')
 
 #seed Users with three players
 User.create(name: "khwang", game: "room1")
