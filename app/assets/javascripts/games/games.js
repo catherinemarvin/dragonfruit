@@ -109,7 +109,7 @@ $(document).ready(function () {
 		$("#startGame").css("display","none");
 		displaySourceImage();
 		//assume game doesn't start until webcam is loaded
-		webcam.capture(3);
+		webcam.capture(10);
 	}
 
 	var displaySourceImage = function () {
@@ -122,6 +122,7 @@ $(document).ready(function () {
 
 	var displayImages = function () {
 		console.log("Time to load images")
+		$("#status").text("Click on an image to vote for it!");
 		$.get("/games/"+$.cookie("gameId")+"/getImages", function (data) {
 			console.log(data);
 			for (i in data) {

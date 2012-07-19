@@ -91,7 +91,7 @@ class GamesController < ApplicationController
   def winner
     logger.debug "And the winner is..."
     logger.debug params[:id]
-    winner = GamesImage.find(:first, { :order => 'votes desc' } )
+    winner = GamesImage.find(:first, { :conditions => { :gameId => params[:id] }, :order => 'votes desc' } )
     logger.debug(winner.imageUrl)
     render json: { :url => winner.imageUrl }.to_json
   end
